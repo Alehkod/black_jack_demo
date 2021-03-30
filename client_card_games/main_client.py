@@ -33,9 +33,9 @@ class Game:
         self.__player_points = 0
         self.__dealer_cards_list = []
         self.__dealer_points = 0
-        self.player = player.Player(self.__player_cards_list, self.__player_points, (650, 500), 'Oleg')
-        self.dealer = player.Player(self.__dealer_cards_list, self.__dealer_points, (100, 500), 'Dealer')
-        self.shared_cards = cards.SpriteCards(self.__shared, 1100, 350, 2, open_cards=False).cards
+        self.player = player.Player(self.__player_cards_list, self.__player_points, (100, 550), 'Oleg')
+        self.dealer = player.Player(self.__dealer_cards_list, self.__dealer_points, (100, 100), 'Dealer')
+        self.shared_cards = cards.SpriteCards(self.__shared, 1100, 350, step=2, open_cards=False)
 
     @staticmethod
     def create_game():
@@ -75,25 +75,24 @@ class Game:
                         sock.send(cmd.encode("utf-8"))
                         self.__receive_serv()
 
-            sprite_point_player = cards.Button(100, 650, f'{self.player.point} point', red, color_fon=None)
-            sprite_point_dealer = cards.Button(100, 200, f'{self.dealer.point} point', red, color_fon=None)
+            sprite_point_player = cards.Button(100, 650, f'{self.player.name} {self.player.point} point', red, color_fon=None)
+            sprite_point_dealer = cards.Button(100, 200, f'{self.dealer.name} {self.dealer.point} point', red, color_fon=None)
             menu_sprite = pygame.sprite.Group(self.draw_button, self.pass_button, sprite_point_dealer,
                                               sprite_point_player)
 
-            self.player.list_cards_upp(self.__player_cards_list)
-            self.dealer.list_cards_upp(self.__dealer_cards_list)
-            self.shared_cards.update()
-            # self.player.sprite_cards.update()
-            # self.dealer.sprite_cards.update()
+            self.player.list_cards_upp(self.__player_points, self.__player_cards_list)
+            self.dealer.list_cards_upp(self.__dealer_points, self.__dealer_cards_list)
+            self.shared_cards.sprite_upp(self.__shared)
             pygame.display.update()
 
             self.screen.blit(self.table_img, (0, 0))
             menu_sprite.draw(self.screen)
-            self.shared_cards.draw(self.screen)
+            self.shared_cards.cards.draw(self.screen)
             self.player.sprite_cards.draw(self.screen)
             self.dealer.sprite_cards.draw(self.screen)
 
-    def quit(self):
+    @staticmethod
+    def quit():
         pygame.quit()
 
 

@@ -17,9 +17,10 @@ class Player(pygame.sprite.Sprite):
         self.sprite_cards = self.__sprite_cards()
 
     def __sprite_cards(self):
-        return cards.SpriteCards(self.__list_cards, self.point, *self.__pos_cards, open_cards=True).cards
+        return cards.SpriteCards(self.__list_cards, *self.__pos_cards, open_cards=True).cards
 
-    def list_cards_upp(self, args):
+    def list_cards_upp(self, point, args):
         self.__list_cards = args
         self.sprite_cards = self.__sprite_cards()
+        self.point = point
         self.sprite_cards.update()

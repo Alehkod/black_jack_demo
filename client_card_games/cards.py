@@ -56,6 +56,11 @@ class SpriteCards(pygame.sprite.Sprite):
             x += self.step
         return deck_sprite
 
+    def sprite_upp(self, args):
+        self.__list_cards = args
+        self.cards = self.__sprite_cards()
+        self.cards.update()
+
 
 class Button(pygame.sprite.Sprite):
     def __init__(self, x, y, text, color, color_fon=gray):

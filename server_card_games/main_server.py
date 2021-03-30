@@ -49,7 +49,6 @@ def convert():
         list(map(lambda a: str(a), black_jack.dealer.card_list)),
         black_jack.dealer.point,
     )
-    print(data)
     data = json.dumps(data).encode('utf-8')
     return data
 
