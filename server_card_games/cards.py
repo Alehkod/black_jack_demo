@@ -5,7 +5,7 @@ class Cards:
         self.suit = suit
 
     def __repr__(self):
-        return f'{self.value} {self.suit}'
+        return f'{self.suit}_{self.value}'
 
     def __str__(self):
         return f'{self.suit}_{self.value}'

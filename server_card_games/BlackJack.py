@@ -42,12 +42,15 @@ black_jack = Game()
 
 
 def convert():
-    data = json.dumps((str(black_jack.shared.deck_cards),
-                       str(black_jack.player.card_list),
-                       black_jack.player.point,
-                       str(black_jack.dealer.card_list),
-                       black_jack.dealer.point,
-                       )).encode('utf-8')
+    data = (
+        list(map(lambda a: str(a), black_jack.shared.deck_cards)),
+        list(map(lambda a: str(a), black_jack.player.card_list)),
+        black_jack.player.point,
+        list(map(lambda a: str(a), black_jack.dealer.card_list)),
+        black_jack.dealer.point,
+    )
+    print(data)
+    data = json.dumps(data).encode('utf-8')
     return data
 
 
